@@ -36,7 +36,7 @@ jobs:
           node-version: ${{ steps.package-engines-versions.outputs.nodeVersion }}
           cache: 'npm'
 
-      ## Deploying the Vite application to S3
+      ## Deploying the Vite Application to S3
       - name: Install Node modules
         run: npm ci
       - name: Build React Vite Application
