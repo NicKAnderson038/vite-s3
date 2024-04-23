@@ -31,7 +31,7 @@ jobs:
           #     }
           #    ]
           #   }
-          audience: sts.amazonaws.com.cn
+          # audience: sts.amazonaws.com.cn
           aws-region: ${{ vars.AWS_TARGET_REGION }}
           role-to-assume: ${{ vars.AWS_GITHUB_ACTIONS_ROLE }}
           role-session-name: "GitHubActions-DeployLayerStack"
