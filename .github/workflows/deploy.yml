@@ -13,8 +13,8 @@ jobs:
   deploy_lambda_stack_or_app:
     runs-on: ubuntu-latest
     steps:
-      - name: Show region
-        run: echo "Region is ${{ vars.AWS_TARGET_REGION }}"
+      # - name: Show region
+      #   run: echo "Region is ${{ vars.AWS_TARGET_REGION }}"
       - name: Checkout this repo
         uses: actions/checkout@v3
 
@@ -36,21 +36,12 @@ jobs:
           node-version: ${{ steps.package-engines-versions.outputs.nodeVersion }}
           cache: 'npm'
 
-      ## Deploying the LambdaStack via CDK is a toy example, so we don't need to do it here
-      # - name: Deploy LambdaStack (via CDK)
-      #   uses: youyo/aws-cdk-github-actions@v2
-      #   with:
-      #     cdk_subcommand: 'deploy'
-      #     cdk_stack: 'LambdaStack'
-      #     cdk_args: '--require-approval never' # This is a toy example, so we don't need to approve changes
-      #     actions_comment: false
-
-      ## Deploying the Astro application to S3 and CloudFront
-      # - name: Install Node modules
-      #   run: npm ci
-      # - name: Build Astro application
-      #   run: npm run build
-      # - name: Deploy to S3
-      #   run: aws s3 sync --delete ./dist/ s3://${{ secrets.BUCKET_ID }}
+      ## Deploying the Vite application to S3
+      - name: Install Node modules
+        run: npm ci
+      - name: Build React Vite Application
+        run: npm run build
+      - name: Deploy to S3
+        run: aws s3 sync --delete ./dist/ s3://${{ secrets.BUCKET_ID }}
       # - name: Create CloudFront invalidation
       #   run: aws cloudfront create-invalidation --distribution-id ${{ secrets.DISTRIBUTION_ID }} --paths "/*"
